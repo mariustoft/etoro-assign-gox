@@ -1,22 +1,17 @@
 package main
 
 import (
+	"html/template"
 	"net/http"
 	"os"
 )
 
-func indexHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("<h1>Hello d!</h1>"))
-}
-
 func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "3000"
-	}
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 
-	mux := http.NewServeMux()
+		templ, _ := template.New("test").Parse("Hello, {{.}}!")
+		templ.Execute(w, "World")
 
-	mux.HandleFunc("/", indexHandler)
-	http.ListenAndServe(":"+port, mux)
+	})
+	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 }
