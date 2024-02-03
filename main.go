@@ -1,45 +1,23 @@
+// main.go
 package main
 
 import (
-	"fmt"
 	"net/http"
-	// "os"
-	// "todox/internal/app"
-	// "todox/internal/app/config"
-	// "github.com/leapkit/core/server"
+	"os"
 )
 
-// func main() {
-// 	s := server.New(
-// 		"Todox",
-
-// 		server.WithPort(config.Port),
-// 		server.WithHost(config.Host),
-// 	)
-
-// 	// Application services
-// 	if err := app.AddServices(s); err != nil {
-// 		fmt.Println(err)
-// 		os.Exit(1)
-// 	}
-
-// 	// Application routes
-// 	if err := app.AddRoutes(s); err != nil {
-// 		fmt.Println(err)
-// 		os.Exit(1)
-// 	}
-
-// 	if err := s.Start(); err != nil {
-// 		fmt.Println(err)
-// 	}
-// }
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("<h1>Hello Worxxxxld!</h1>"))
+}
 
 func main() {
-	// simple hellow work h1 server for webpage with native go
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "ddd?d")
-	})
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
 
-	http.ListenAndServe(":8080", nil)
+	mux := http.NewServeMux()
 
+	mux.HandleFunc("/", indexHandler)
+	http.ListenAndServe(":"+port, mux)
 }
