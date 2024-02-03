@@ -1,0 +1,1 @@
+# etoro-assign-gox
