@@ -37,7 +37,7 @@ import (
 func main() {
 	// simple hellow work h1 server for webpage with native go
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello smdax?d")
+		fmt.Fprintf(w, "ddd?d")
 	})
 
 	http.ListenAndServe(":8080", nil)

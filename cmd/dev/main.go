@@ -9,9 +9,7 @@ import (
 
 func main() {
 	err := gloves.Start(
-		"cmd/app/main.go",
-
-		config.GlovesOptions...,
+		"cmd/app/main.go", config.GlovesOptions...,
 	)
 
 	if err != nil {
