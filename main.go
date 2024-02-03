@@ -5,14 +5,14 @@ import (
 	"net/http"
 )
 
-func helloHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello, you've requested: %s\n", r.URL.Path)
-}
-
 func main() {
-	http.HandleFunc("/", helloHandler)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		// return html code
+		fmt.Fprintf(w, "<h1>Hello, World</hf>")
 
-	fmt.Println("Starting server at port 80")
+	})
+
+	fmt.Println("Starting server at port 80...")
 	if err := http.ListenAndServe(":80", nil); err != nil {
 		panic(err)
 	}
