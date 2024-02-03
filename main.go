@@ -1,14 +1,27 @@
 package main
 
 import (
-	"fmt"
+	"html/template"
 	"net/http"
 )
 
 func main() {
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, "Hexllo World")
+
+		tmpl := template.Must(template.New("index").Parse(`
+		<!DOCTYPE html>
+		<html>
+		<head>
+		<title>Go Web App</title>
+		</head>
+		<body>
+		<h1>Welcome to Go Web App</h1>
+		</body>
+		</html>
+		`))
+		tmpl.Execute(w, nil)
 	})
+
 	http.ListenAndServe(":8080", nil)
 }
