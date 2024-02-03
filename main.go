@@ -6,14 +6,9 @@ import (
 )
 
 func main() {
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		// return html code
-		fmt.Fprintf(w, "<h1>Hello, World</hf>")
-
+		fmt.Fprint(w, "Hexllo World")
 	})
-
-	fmt.Println("Starting server at port 80...")
-	if err := http.ListenAndServe(":80", nil); err != nil {
-		panic(err)
-	}
+	http.ListenAndServe(":8080", nil)
 }
