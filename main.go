@@ -1,4 +1,3 @@
-// main.go
 package main
 
 import (
@@ -7,7 +6,7 @@ import (
 )
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("<h1>Hello Worxxxxld!</h1>"))
+	w.Write([]byte("<h1>Hello d!</h1>"))
 }
 
 func main() {

@@ -1,3 +1,3 @@
-module github.com/freshman-tech/news-demo-starter-files
+module github.com/mariustoft/etoro-assign-gox
 
-go 1.15
+go 1.21
