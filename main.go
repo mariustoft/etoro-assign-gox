@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	tmpl, _ := template.ParseFiles("home.html", "header.html")
+	tmpl, _ := template.ParseFiles("templates/home.html", "templates/header.html")
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 
