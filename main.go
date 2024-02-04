@@ -3,29 +3,27 @@ package main
 import (
 	"encoding/json"
 	"html/template"
-	"io"
 	"net/http"
 	"os"
 	"strconv"
 )
 
-var portfolio = []map[string]interface{}{
-	{"Name": "cardano", "Quantity": 12},
-	{"Name": "bitcoin", "Quantity": 22},
-	{"Name": "ethereum", "Quantity": 32},
-	{"Name": "solana", "Quantity": 52},
-}
-
-var currencies = []string{"usd", "eur", "gbp", "jpy", "cny"}
-
 func main() {
+
+	currencies := make([]string, 0)
+	currenciesResp, _ := http.Get("https://api.coingecko.com/api/v3/simple/supported_vs_currencies")
+	json.NewDecoder(currenciesResp.Body).Decode(&currencies)
+
+	coins := make([]map[string]interface{}, 0)
+	coinsResp, _ := http.Get("https://api.coingecko.com/api/v3/coins/list")
+	json.NewDecoder(coinsResp.Body).Decode(&coins)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		tmpl, _ := template.ParseFiles("templates/home.html", "templates/convertor.html")
 
 		tmpl.Execute(w, map[string]interface{}{
+			"coins":      coins,
 			"currencies": currencies,
-			"portfolio":  portfolio,
 		})
 
 	})
@@ -37,22 +35,17 @@ func main() {
 		selectedCurrency := r.FormValue("selectedCurrency")
 		selectedAmount, _ := strconv.ParseFloat(r.FormValue("selectedAmount"), 64)
 
-		url := "https://api.coingecko.com/api/v3" + "/simple/price"
-		url += "?ids=" + selectedCoin + "&vs_currencies=" + selectedCurrency + "&amount=" + strconv.FormatFloat(selectedAmount, 'f', -1, 64)
-
-		resp, _ := http.Get(url)
-		body, _ := io.ReadAll(resp.Body)
-
 		data := make(map[string]map[string]float64)
-		json.Unmarshal([]byte(body), &data)
+		resp, _ := http.Get("https://api.coingecko.com/api/v3" + "/simple/price" + "?ids=" + selectedCoin + "&vs_currencies=" + selectedCurrency)
+		json.NewDecoder(resp.Body).Decode(&data)
 
 		tmpl.Execute(w, map[string]interface{}{
+			"coins":                coins,
+			"currencies":           currencies,
 			"selectedAmount":       selectedAmount,
 			"selectedCoin":         selectedCoin,
 			"selectedCurrency":     selectedCurrency,
 			"calculatedConversion": data[selectedCoin][selectedCurrency] * selectedAmount,
-			"currencies":           currencies,
-			"portfolio":            portfolio,
 		})
 
 	})
