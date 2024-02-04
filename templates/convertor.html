@@ -2,15 +2,15 @@
   class="w-full p-4 flex flex-col md:flex-row justify-start relative gap-2"
   hx-post="/convertor"
   hx-swap="outerHTML"
+  hx-target="#convertor"
   id="convertor"
 >
-  {{ .selectedAmount }} 
   <input
     class="p-2 text-xl font-black w-20 appearance-none border-2 border-black rounded-md"
     required
     autofocus
     type="number"
-    value="{{.selectedAmount}}"
+    value="{{ .selectedAmount }}"
     name="selectedAmount"
     min="0"
   />
@@ -19,12 +19,13 @@
     class="p-2 text-xl font-black w-30 appearance-none border-2 border-black rounded-md"
     required
     name="selectedCoin"
+    value="{{ .selectedCoin }}"
   >
-    {{ range .Portfolio }}
+    {{ range .portfolio }}
     <option
       class="flex items-center justify-between bg-green cursor-pointer hover:text-green-500"
     >
-      <span class="text-lg font-bold">{{.Name}}</span>
+      {{.Name}}
     </option>
     {{ end }}
   </select>
@@ -33,27 +34,27 @@
     class="p-2 text-xl font-black w-30 appearance-none border-2 border-black rounded-md"
     required
     name="selectedCurrency"
+    value="{{ .selectedCurrency }}"
   >
-    {{ range .Currencies }}
+    {{ range .currencies }}
     <option
       class="flex items-center justify-between bg-green cursor-pointer hover:text-green-500"
     >
-      <span class="text-lg font-bold">{{.}}</span>
+      {{.}}
     </option>
     {{ end }}
   </select>
 
   <button
     class="text-xlmd:text-xs font-bold b-1 bg-black border-green-500 border-2 rounded-md px-2 hover:bg-green-500 text-white"
-    type="submit"
   >
     Convert
   </button>
 
-  {{ if .SelectedCurrency }}
+  {{ if .calculatedConversion }}
   <span class="text-xl font-black m-0">
     Total // <br />
-    {{ .SelectedAmount }} {{ .SelectedCoin }} = {{ .SelectedCurrency }}
+    {{ .calculatedConversion }} {{ .selectedCurrency }}
   </span>
   {{ end }}
 </form>
