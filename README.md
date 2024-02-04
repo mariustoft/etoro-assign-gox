@@ -1,7 +1,7 @@
 # etoro-assign-gox
 
-- Repository: [https://github.com/mariustoft/etoro-assign-gox](https://github.com/mariustoft/etoro-assign-gox)
-- Live Application: [https://etoro-assign-gox.up.railway.app](https://etoro-assign-gox.up.railway.app)
+- repo: [https://github.com/mariustoft/etoro-assign-gox](https://github.com/mariustoft/etoro-assign-gox)
+- deploy: [https://etoro-assign-gox.up.railway.app](https://etoro-assign-gox.up.railway.app)
 
 ## Running Locally
 
