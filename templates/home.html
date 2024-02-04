@@ -8,17 +8,6 @@
     <title>Document</title>
   </head>
   <body class="flex flex-col items-center justify-center h-screen bg-gray-100">
-    {{ template "header.html" . }}
-    <form class="flex space-x-2" hx-post="/" hx-target="#message">
-      <input
-        class="border border-gray-300 rounded-md p-2"
-        type="text"
-        name="new-header"
-        value="{{ .Header }}"
-      />
-      <button class="bg-blue-500 text-white px-4 py-2 rounded-md">
-        <span>Change Header</span>
-      </button>
-    </form>
+    {{ template "header.html" . }} {{ template "convertor.html" .}}
   </body>
 </html>
