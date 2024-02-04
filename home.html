@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <title>Document</title>
+  </head>
+  <body class="flex flex-col items-center justify-center h-screen bg-gray-100">
+    {{ template "header.html" . }}
+    <form class="flex space-x-2" hx-post="/" hx-target="#message">
+      <input
+        class="border border-gray-300 rounded-md p-2"
+        type="text"
+        name="new-header"
+        value="{{ .Header }}"
+      />
+      <button class="bg-blue-500 text-white px-4 py-2 rounded-md">
+        <span>Change Header</span>
+      </button>
+    </form>
+  </body>
+</html>

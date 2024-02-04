@@ -1,0 +1,19 @@
+<form
+  class="w-full p-4 flex flex-col md:flex-row justify-start relative gap-2"
+  id="convertor"
+>
+  <input
+    class="p-2 text-xl font-black w-20 appearance-none border-2 border-black rounded-md"
+    required
+    autofocus
+    type="number"
+    name="selectedAmount"
+    min="0"
+  />
+
+  <button
+    class="text-xlmd:text-xs font-bold b-1 bg-black border-green-500 border-2 rounded-md px-2 hover:bg-green-500 text-white"
+  >
+    {{ .Header }}
+  </button>
+</form>
