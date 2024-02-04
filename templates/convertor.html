@@ -2,8 +2,6 @@
   class="w-full p-4 flex flex-col md:flex-row justify-start relative gap-2"
   hx-post="/convertor"
   hx-swap="outerHTML"
-  hx-target="#convertor"
-  id="convertor"
 >
   <input
     class="p-2 text-xl font-black w-20 appearance-none border-2 border-black rounded-md"
@@ -34,10 +32,10 @@
     class="p-2 text-xl font-black w-30 appearance-none border-2 border-black rounded-md"
     required
     name="selectedCurrency"
-    value="{{ .selectedCurrency }}"
   >
     {{ range .currencies }}
     <option
+      value="{{.}}"
       class="flex items-center justify-between bg-green cursor-pointer hover:text-green-500"
     >
       {{.}}

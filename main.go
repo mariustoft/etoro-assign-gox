@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"html/template"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -23,6 +24,8 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		tmpl, _ := template.ParseFiles("templates/home.html", "templates/convertor.html")
 
+		log.Println("print in main")
+
 		tmpl.Execute(w, map[string]interface{}{
 			"currencies": currencies,
 			"portfolio":  portfolio,
@@ -32,6 +35,8 @@ func main() {
 
 	http.HandleFunc("/convertor", func(w http.ResponseWriter, r *http.Request) {
 		tmpl, _ := template.ParseFiles("templates/convertor.html")
+
+		log.Println("print in conv")
 
 		selectedCoin := r.FormValue("selectedCoin")
 		selectedCurrency := r.FormValue("selectedCurrency")
