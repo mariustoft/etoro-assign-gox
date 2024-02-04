@@ -6,9 +6,9 @@
   <select class="p-2 text-xl font-black w-30 appearance-none border-2 border-black rounded-md" required
     name="selectedCoin" value="{{ .selectedCoin }}">
     {{ range .coins }}
-    <option {{ if eq .id $.selectedCoin }} selected {{ end }} value="{{.id}}"
+    <option {{ if eq . $.selectedCoin }} selected {{ end }} value="{{.}}"
       class="flex items-center justify-between bg-green cursor-pointer hover:text-green-500">
-      {{.symbol}}
+      {{.}}
     </option>
     {{ end }}
   </select>

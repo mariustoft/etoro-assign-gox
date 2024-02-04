@@ -14,9 +14,7 @@ func main() {
 	currenciesResp, _ := http.Get("https://api.coingecko.com/api/v3/simple/supported_vs_currencies")
 	json.NewDecoder(currenciesResp.Body).Decode(&currencies)
 
-	coins := make([]map[string]interface{}, 0)
-	coinsResp, _ := http.Get("https://api.coingecko.com/api/v3/coins/list")
-	json.NewDecoder(coinsResp.Body).Decode(&coins)
+	coins := []string{"bitcoin", "ethereum", "ripple", "litecoin", "dogecoin", "tether", "cardano", "polkadot", "stellar"}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		tmpl, _ := template.ParseFiles("templates/home.html", "templates/convertor.html")
