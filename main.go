@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"html/template"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -14,7 +13,7 @@ var portfolio = []map[string]interface{}{
 	{"Name": "cardano", "Quantity": 12},
 	{"Name": "bitcoin", "Quantity": 22},
 	{"Name": "ethereum", "Quantity": 32},
-	{"Name": "eolana", "Quantity": 52},
+	{"Name": "solana", "Quantity": 52},
 }
 
 var currencies = []string{"usd", "eur", "gbp", "jpy", "cny"}
@@ -23,8 +22,6 @@ func main() {
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		tmpl, _ := template.ParseFiles("templates/home.html", "templates/convertor.html")
-
-		log.Println("print in main")
 
 		tmpl.Execute(w, map[string]interface{}{
 			"currencies": currencies,
@@ -35,8 +32,6 @@ func main() {
 
 	http.HandleFunc("/convertor", func(w http.ResponseWriter, r *http.Request) {
 		tmpl, _ := template.ParseFiles("templates/convertor.html")
-
-		log.Println("print in conv")
 
 		selectedCoin := r.FormValue("selectedCoin")
 		selectedCurrency := r.FormValue("selectedCurrency")
