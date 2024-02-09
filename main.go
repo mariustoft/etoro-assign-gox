@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"html/template"
 	"net/http"
-	"os"
 	"strconv"
 )
 
@@ -48,5 +47,6 @@ func main() {
 
 	})
 
-	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
+	http.ListenAndServe(":8080", nil)
+
 }

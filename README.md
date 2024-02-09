@@ -5,20 +5,18 @@
 
 ## Running Locally
 
-To run the application locally, follow these steps:
+### To run the application locally, use the ./dev.sh script:
 
-1. Install the `gin` package by running the following command:
+ 1 Fist give permision to execute the script:
 
-   ```shell
-   go get github.com/codegangsta/gin
+```bash
+chmod +x dev.sh
+```
 
-   ```
+2 Then run the script:
 
-2. Run the application using the following command:
+```
+./dev.sh
+```
 
-   ```shell
-   gin run main.go
-
-   ```
-
-3. The application will be available at `http://localhost:3000`.
+The application will be available at `http://localhost:8080`. The script will watch for file changes and restart the server automatically. You still need to refresh the browser to see the changes.
