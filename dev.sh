@@ -1,14 +1,12 @@
-#!/bin/bash
+# Description: A simple script to run a Go server and watch for file changes
+
+# PID of the server
+pid=$(lsof -ti :8080)
 
 # Run the server
 go run main.go &
 echo -e "🚀 Server is running..."
-
-# Welcome message
 echo -e "🚀 Click on http://localhost:8080"
-
-# message for file change
-# echo -e "📄 File changed: $file"
 
 # Get a list of all .go, .html, and .css files
 files=$(find . -type f \( -name "*.go" -o -name "*.html" -o -name "*.css" \))
@@ -21,21 +19,22 @@ for file in $files; do
 done
 
 while true; do
-    sleep 1 # Poll every second
+    sleep 1
 
-    # Check if any .go, .html, or .css files have changed
     for file in $files; do
-        new_mod_time=$(stat -c "%y" "$file")
         old_mod_time=${mod_times["$file"]}
+        new_mod_time=$(stat -c "%y" "$file")
 
         if [ "$old_mod_time" != "$new_mod_time" ]; then
             mod_times["$file"]="$new_mod_time"
-            kill %1
+            kill -9 $pid 2> /dev/null
             go run main.go &
             echo -e "📄 File changed: $file"
-
             break
         fi
 
     done
 done
+
+# Kill the server when the script exits
+trap "kill -9 $pid 2> /dev/null" EXIT
