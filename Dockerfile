@@ -10,4 +10,4 @@ COPY . .
 RUN go build -o main .
 
 # Run the application
-CMD ["go run main"]
+CMD ["./main"]
