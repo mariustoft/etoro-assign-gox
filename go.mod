@@ -1,3 +1,3 @@
-module github.com/mariustoft/etoro-assign-gox
+module main
 
 go 1.21
